@@ -1,0 +1,16 @@
+{
+    "tasks": [
+        {
+            "id": 1,
+            "name": "Study Maths"
+        },
+        {
+            "id": 2,
+            "task": "Study Angular"
+        },
+        {
+            "id": 3,
+            "task": "jak"
+        }
+    ]
+}
