@@ -13,7 +13,7 @@ import { JsonPipe } from '@angular/common';
 })
 export class AllTodosComponent implements OnInit {
   todos?: TodoData;
-
+  tempTodos?: TodoData;
   // injecting the http service we made
   httpService: HttpService = inject(HttpService);
 
@@ -21,8 +21,6 @@ export class AllTodosComponent implements OnInit {
     // will use the http service to get the data for todos array
     this.httpService.getData().subscribe( (data: TodoData) => {
       this.todos = data;
-      console.log('Before:',this.todos)
-
     } )
 
   }
@@ -40,13 +38,32 @@ export class AllTodosComponent implements OnInit {
           event.currentIndex);
     }
 
+    // updating the data in db.json
+    for (let  i: number = event.previousIndex; i <= event.currentIndex; i++){
+      this.httpService.getData().subscribe( (data) => {
+        this.tempTodos = data; // a temporary data to match the ids and update the data in db.json
+        
+          let tempTodosId: number = Number(this.tempTodos[i].id);
+          this.httpService.putData( this.todos![i], tempTodosId ).subscribe ( (data) => console.log ('updated: ',data));
 
-    // changing the whole data in the todos at db.json one by one
-    if (this.todos !== undefined){
-      this.todos.forEach( (todo, index) => 
-        this.httpService.putData( todo, index+1).subscribe()
-      ) // forEach ends here
-    
-    } // if ends here
+      }) // getData subscribe ends here
+    } // updating the data in db.json ends here
+
   }// drop functions endss here
-}
+
+
+
+  deleteData( id: string): void {
+    console.log (id);
+    this.httpService.deleteData(Number(id)).subscribe( (data: TodoData) => {
+
+      // get the upated data from db.json
+      this.httpService.getData().subscribe( (data: TodoData) => {
+        this.todos = data
+        console.log (this.todos);
+    }) // getData subscribe ends here
+  })  // deleteData subscribe ends here
+
+
+  } // deleteData() ends here
+}// ! COMPONENT ENDS HERE

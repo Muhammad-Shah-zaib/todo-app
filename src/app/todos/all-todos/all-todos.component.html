@@ -7,8 +7,16 @@
     @if (todos?.length === 0){
       <div class="list-item hover:border-l-4 border-l-red-500 transition-all duration-75">No Todos Yet</div>
     }@else{
-      @for (item of todos; track item) {
-        <div class="list-item hover:border-l-4 border-l-blue-500 transition-all duration-75" cdkDrag>{{item .task}}</div>
+      @for (item of todos; track item; let i = $index ) {
+
+        <div class="list-item hover:border-l-4 border-l-blue-500 transition-all duration-75" cdkDrag>
+          <span class="mt-2"><p class="">{{item .task}}</p></span>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 z-10" (click)="deleteData(item.id)">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+          </svg>
+        </div>
+        
+        
       }
     }
   </div>

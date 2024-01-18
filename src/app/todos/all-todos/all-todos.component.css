@@ -16,6 +16,10 @@
 }
 
 .list-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   padding: 20px 10px;
   border-bottom: solid 1px #ccc;
   box-sizing: border-box;

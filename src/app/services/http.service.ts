@@ -22,4 +22,10 @@ export class HttpService {
     return this.http.put<TodoData>(this.url + id, task);
   }
 
+
+  // deleteData() method that is used to delete specific task in our db.json
+  deleteData( id: number ): Observable<TodoData> {
+    return this.http.delete<TodoData>(this.url + id);
+  }
+
 }
