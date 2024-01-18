@@ -25,10 +25,6 @@
   font-size: 14px;
 }
 
-.list-item:last-child {
-  border: none;
-}
-
 /* Highlight the list item that is being dragged. */
 .cdk-drag-preview {
   border-radius: 4px;

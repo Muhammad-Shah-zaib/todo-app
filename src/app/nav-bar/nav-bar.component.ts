@@ -8,6 +8,7 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { AllTodosComponent } from '../todos/all-todos/all-todos.component';
 
 @Component({
   selector: 'app-nav-bar',
@@ -21,6 +22,7 @@ import { map, shareReplay } from 'rxjs/operators';
     MatListModule,
     MatIconModule,
     AsyncPipe,
+    AllTodosComponent
   ]
 })
 export class NavBarComponent {
