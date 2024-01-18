@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
-import { observableToBeFn } from 'rxjs/internal/testing/TestScheduler';
+import { TodoData } from '../interfaces/todo-data';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,9 @@ export class HttpService {
 
   constructor() { }
 
-  getData(): Observable<any> {
-    return this.http.get("http://localhost:3000/tasks/");
+  // getData() method returns an Observable of TodoData)
+  getData(): Observable<TodoData> {
+    return this.http.get<TodoData>('http://localhost:3000/tasks/');
   }
+
 }
