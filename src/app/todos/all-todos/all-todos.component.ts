@@ -44,7 +44,8 @@ export class AllTodosComponent implements OnInit {
         this.tempTodos = data; // a temporary data to match the ids and update the data in db.json
         
           let tempTodosId: number = Number(this.tempTodos[i].id);
-          this.httpService.putData( this.todos![i], tempTodosId ).subscribe ( (data) => console.log ('updated: ',data));
+          this.httpService.putData( this.todos![i], tempTodosId ).subscribe ( (data) => console.log ('updated: ',data),
+          (error) => console.log ('error: ', error));
 
       }) // getData subscribe ends here
     } // updating the data in db.json ends here

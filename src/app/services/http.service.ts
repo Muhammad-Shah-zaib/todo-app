@@ -17,6 +17,10 @@ export class HttpService {
     return this.http.get<TodoData>(this.url);
   }
 
+  getDataById( id: number ): Observable<TodoData> {
+    return this.http.get<TodoData>(this.url + id);
+  }
+
   // putData() method that is used to update specific task in our db.json
   putData( task: Root2, id: number ): Observable<TodoData> {
     return this.http.put<TodoData>(this.url + id, task);
