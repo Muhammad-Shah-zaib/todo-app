@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AllTodosComponent } from '../todos/all-todos/all-todos.component';
+import { FavTodosComponent } from '../todos/fav-todos/fav-todos.component';
 
 @Component({
   selector: 'app-nav-bar',
@@ -22,7 +23,8 @@ import { AllTodosComponent } from '../todos/all-todos/all-todos.component';
     MatListModule,
     MatIconModule,
     AsyncPipe,
-    AllTodosComponent
+    AllTodosComponent,
+    FavTodosComponent
   ]
 })
 export class NavBarComponent {

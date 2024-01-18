@@ -39,8 +39,10 @@
       <span>todo-app</span>
     </mat-toolbar>
     <!-- write content here -->
-    @if (alltodos === true){
+    @if (alltodos){
       <app-all-todos></app-all-todos>
+    }@else if (favtodos){
+      <app-fav-todos></app-fav-todos>
     }
   </mat-sidenav-content>
 </mat-sidenav-container>
