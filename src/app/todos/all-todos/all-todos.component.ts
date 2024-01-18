@@ -19,12 +19,18 @@ export class AllTodosComponent implements OnInit {
 
   ngOnInit(): void {
     // will use the http service to get the data for todos array
-    this.httpService.getData().subscribe( (data: TodoData) => this.todos = data)
+    this.httpService.getData().subscribe( (data: TodoData) => {
+      this.todos = data;
+      console.log('Before:',this.todos)
+
+    } )
+
   }
 
 
-  // Drop Method for Drag and Drop written by CDK
+  // Drop Method for Drag and Drop written by CDK, it is also chnging the data in db.json
   drop(event: CdkDragDrop<any>): void {
+
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
@@ -34,6 +40,13 @@ export class AllTodosComponent implements OnInit {
           event.currentIndex);
     }
 
-  }
 
+    // changing the whole data in the todos at db.json one by one
+    if (this.todos !== undefined){
+      this.todos.forEach( (todo, index) => 
+        this.httpService.putData( todo, index+1).subscribe()
+      ) // forEach ends here
+    
+    } // if ends here
+  }// drop functions endss here
 }

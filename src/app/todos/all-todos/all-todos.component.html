@@ -3,8 +3,13 @@
 
   <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todos"
       class="list" (cdkDropListDropped)="drop($event)">
-    @for (item of todos; track item) {
-      <div class="list-item hover:border-l-4 border-l-red-500 transition-all duration-75" cdkDrag>{{item .task}}</div>
+
+    @if (todos?.length === 0){
+      <div class="list-item hover:border-l-4 border-l-red-500 transition-all duration-75">No Todos Yet</div>
+    }@else{
+      @for (item of todos; track item) {
+        <div class="list-item hover:border-l-4 border-l-blue-500 transition-all duration-75" cdkDrag>{{item .task}}</div>
+      }
     }
   </div>
 </div>
