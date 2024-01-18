@@ -4,14 +4,14 @@ import { Root2, TodoData } from '../../interfaces/todo-data';
 import { HttpService } from '../../services/http.service'
 import { JsonPipe } from '@angular/common';
 import { CommonModule } from '@angular/common';
-import { NgClass } from '@angular/common';
+import { AddTaskComponent } from './add-task/add-task.component';
 
 @Component({
   selector: 'app-all-todos',
   templateUrl: './all-todos.component.html',
   styleUrl: './all-todos.component.css',
   standalone: true,
-  imports: [CdkDrag, CdkDropList, JsonPipe, CommonModule, NgClass]
+  imports: [CdkDrag, CdkDropList, JsonPipe, CommonModule,AddTaskComponent]
 })
 export class AllTodosComponent implements OnInit {
   todos?: TodoData;

@@ -1,5 +1,7 @@
 <div class=" p-8">
-  <h2>All Todos</h2>
+  <h2>Add Task</h2>
+  <app-add-task></app-add-task>
+  <h2>All Task</h2>
 
   <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todos"
       class="list" (cdkDropListDropped)="drop($event)">
