@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { AsyncPipe } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -11,6 +11,7 @@ import { map, shareReplay } from 'rxjs/operators';
 import { AllTodosComponent } from '../todos/all-todos/all-todos.component';
 import { FavTodosComponent } from '../todos/fav-todos/fav-todos.component';
 import { CompletedTodosComponent } from '../todos/completed-todos/completed-todos.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -29,11 +30,12 @@ import { CompletedTodosComponent } from '../todos/completed-todos/completed-todo
     CompletedTodosComponent
   ]
 })
-export class NavBarComponent {
+export class NavBarComponent implements OnInit {
 
   alltodos: boolean = false;
   favtodos: boolean = false;
   completedtodos: boolean = false;
+  router: Router= inject(Router);
 
   private breakpointObserver = inject(BreakpointObserver);
 
@@ -44,7 +46,19 @@ export class NavBarComponent {
     );
 
 
+  constructor() { }
 
+  ngOnInit(): void {
+    let url = this.router.url;
+    console.log(url);
+    if (/\/(alltodos|home|todos|)/.test(url)){
+      this.loadAllTodos();
+    }else if (/\/(favtodos|favouritetodos|favrouites)/.test(url)){
+      this.loadFavTodos();
+    }else if (/\/(completedtodos|completed|done)/.test(url)){
+      this.loadCompletedTodos();
+    }
+  }
   loadAllTodos(): void {
     this.alltodos = true;
     this.favtodos = false;
