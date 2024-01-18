@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AllTodosComponent } from '../todos/all-todos/all-todos.component';
 import { FavTodosComponent } from '../todos/fav-todos/fav-todos.component';
+import { CompletedTodosComponent } from '../todos/completed-todos/completed-todos.component';
 
 @Component({
   selector: 'app-nav-bar',
@@ -24,7 +25,8 @@ import { FavTodosComponent } from '../todos/fav-todos/fav-todos.component';
     MatIconModule,
     AsyncPipe,
     AllTodosComponent,
-    FavTodosComponent
+    FavTodosComponent,
+    CompletedTodosComponent
   ]
 })
 export class NavBarComponent {
