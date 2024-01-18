@@ -5,9 +5,24 @@
       [opened]="(isHandset$ | async) === false">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
+      <!-- All tasks -->
+      @if (alltodos){
+        <a mat-list-item style="background-color: #cbd5e1;" >ALl Todos</a>
+      }@else {
+        <a mat-list-item (click)="loadAllTodos()">ALl Todos</a>
+      }
+      <!-- favourite tasks -->
+      @if (favtodos){
+        <a mat-list-item style="background-color: #cbd5e1;" >Favourite Todos</a>
+      }@else {
+        <a mat-list-item (click)="loadFavTodos()">Favourite Todos</a>
+      }
+      <!-- completed tasks -->
+      @if (completedtodos){
+        <a mat-list-item style="background-color: #cbd5e1;" >Completed Todos</a>
+      }@else {
+        <a mat-list-item (click)="loadCompletedTodos()">Completed Todos</a>
+      }
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -23,7 +38,9 @@
       }
       <span>todo-app</span>
     </mat-toolbar>
-
-    <app-all-todos></app-all-todos>
+    <!-- write content here -->
+    @if (alltodos === true){
+      <app-all-todos></app-all-todos>
+    }
   </mat-sidenav-content>
 </mat-sidenav-container>

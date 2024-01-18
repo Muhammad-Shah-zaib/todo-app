@@ -3,13 +3,15 @@ import { CdkDrag, CdkDropList, CdkDragDrop, moveItemInArray, transferArrayItem }
 import { Root2, TodoData } from '../../interfaces/todo-data';
 import { HttpService } from '../../services/http.service'
 import { JsonPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-all-todos',
   templateUrl: './all-todos.component.html',
   styleUrl: './all-todos.component.css',
   standalone: true,
-  imports: [CdkDrag, CdkDropList, JsonPipe]
+  imports: [CdkDrag, CdkDropList, JsonPipe, CommonModule, NgClass]
 })
 export class AllTodosComponent implements OnInit {
   todos?: TodoData;
@@ -57,7 +59,7 @@ export class AllTodosComponent implements OnInit {
       }) // getData subscribe ends here
     } // updating the data in db.json ends here
 
-  }// drop functions endss here
+  }// drop functions endss here`
 
 
 

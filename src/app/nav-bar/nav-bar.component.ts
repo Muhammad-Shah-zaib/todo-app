@@ -26,6 +26,11 @@ import { AllTodosComponent } from '../todos/all-todos/all-todos.component';
   ]
 })
 export class NavBarComponent {
+
+  alltodos: boolean = false;
+  favtodos: boolean = false;
+  completedtodos: boolean = false;
+
   private breakpointObserver = inject(BreakpointObserver);
 
   isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
@@ -33,4 +38,24 @@ export class NavBarComponent {
       map(result => result.matches),
       shareReplay()
     );
+
+
+
+  loadAllTodos(): void {
+    this.alltodos = true;
+    this.favtodos = false;
+    this.completedtodos = false;
+  }
+
+  loadFavTodos(): void {
+    this.favtodos = true;
+    this.alltodos = false;
+    this.completedtodos = false;
+  }
+
+  loadCompletedTodos(): void {
+    this.completedtodos = true;
+    this.alltodos = false;
+    this.favtodos = false;
+  }
 }
