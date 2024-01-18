@@ -4,5 +4,5 @@ export interface Root2 {
     id: string;
     task?: string;
     completed?: boolean;
-    important?: boolean;
+    favourite?: boolean;
 }
