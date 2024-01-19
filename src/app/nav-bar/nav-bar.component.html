@@ -30,6 +30,21 @@
       }@else {
         <a mat-list-item (click)="loadCompletedTodos()">Completed Todos</a>
       }
+      <!-- MAKING THEME SELECT OPTION -->
+      <form (ngSubmit)="changeTheme()">
+        <mat-form-field>
+          <mat-label>THEME</mat-label>
+      
+          <mat-select [(ngModel)]="selectedTheme" (ngModelChange)="changeTheme()" [ngModelOptions]="{standalone: true}">
+            <mat-option value="dark">Dark</mat-option>
+            <mat-option value="bright">Bright</mat-option>
+            <mat-option value="default">Default</mat-option>
+          </mat-select>
+          {{selectedTheme}}
+        </mat-form-field>
+      </form>
+      
+
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -47,7 +62,7 @@
     </mat-toolbar>
     <!-- write content here -->
     @if (alltodos){
-      <app-all-todos></app-all-todos>
+      <app-all-todos class="bg-black"></app-all-todos>
     }@else if (favtodos){
       <app-fav-todos></app-fav-todos>
     }@else if (completedtodos){

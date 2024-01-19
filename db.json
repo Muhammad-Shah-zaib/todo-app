@@ -1,28 +1,16 @@
 {
   "tasks": [
     {
-      "id": "79223782",
+      "id": "91151458",
       "task": "Learn Angular",
       "favourite": true,
       "completed": false
     },
     {
-      "id": "34778573",
+      "id": "38277398",
       "task": "Do Dishes",
       "favourite": true,
       "completed": false
-    },
-    {
-      "id": "91151458",
-      "task": "Adding task",
-      "favourite": true,
-      "completed": true
-    },
-    {
-      "id": "38277398",
-      "task": "Adding another task",
-      "favourite": true,
-      "completed": true
     },
     {
       "id": "27054797",

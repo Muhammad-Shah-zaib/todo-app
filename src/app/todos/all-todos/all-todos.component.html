@@ -1,7 +1,8 @@
-<div class=" p-8">
+<div class=" p-8 bg-inherit">
   <h2>Add Task</h2>
   {{ task}}
-<form class="flex justify-around gap-4 md:pr-20 sm:pr-13 pr-8">
+  <!-- MAKING A FORM TO ADD TASK -->
+  <form class="flex justify-around gap-4 md:pr-20 sm:pr-13 pr-8">
     <mat-form-field class="w-[80%]">
         <mat-label>Add Task</mat-label>
         <input matInput placeholder="Ex: Learn Angular" type="text" [(ngModel)]="task" [ngModelOptions]="{standalone: true}">  
@@ -9,9 +10,12 @@
     
     <button mat-raised-button color="primary" style="padding: 25px;" class="md:w-[200px] w-[100px]" (click)="addTask()">Add Task</button>
     
-</form>
+  </form>
+
+  <!-- HEADER FOR TODOS -->
   <h2>All Task</h2>
 
+  
   <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todos"
       class="list" (cdkDropListDropped)="drop($event)">
 

@@ -11,6 +11,9 @@ import { map, shareReplay } from 'rxjs/operators';
 import { AllTodosComponent } from '../todos/all-todos/all-todos.component';
 import { FavTodosComponent } from '../todos/fav-todos/fav-todos.component';
 import { CompletedTodosComponent } from '../todos/completed-todos/completed-todos.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select'
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -27,11 +30,14 @@ import { Router } from '@angular/router';
     AsyncPipe,
     AllTodosComponent,
     FavTodosComponent,
-    CompletedTodosComponent
+    CompletedTodosComponent,
+    MatInputModule,
+    MatSelectModule,
+    FormsModule
   ]
 })
 export class NavBarComponent implements OnInit {
-
+  selectedTheme: string = '';
   alltodos: boolean = false;
   favtodos: boolean = false;
   completedtodos: boolean = false;
@@ -75,5 +81,10 @@ export class NavBarComponent implements OnInit {
     this.completedtodos = true;
     this.alltodos = false;
     this.favtodos = false;
+  }
+
+
+  changeTheme() {
+    console.log ('selected:', this.selectedTheme)
   }
 }

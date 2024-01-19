@@ -4,7 +4,6 @@ import { Root2, TodoData } from '../../interfaces/todo-data';
 import { HttpService } from '../../services/http.service'
 import { JsonPipe } from '@angular/common';
 import { CommonModule } from '@angular/common';
-import { AddTaskComponent } from './add-task/add-task.component';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,7 +15,7 @@ import { MatInputModule } from '@angular/material/input';
   templateUrl: './all-todos.component.html',
   styleUrl: './all-todos.component.css',
   standalone: true,
-  imports: [CdkDrag, CdkDropList, JsonPipe, CommonModule,AddTaskComponent, FormsModule, MatFormFieldModule, MatInputModule, MatIcon, MatButtonModule]
+  imports: [CdkDrag, CdkDropList, JsonPipe, CommonModule, FormsModule, MatFormFieldModule, MatInputModule, MatIcon, MatButtonModule]
 
 })
 export class AllTodosComponent implements OnInit {
