@@ -87,4 +87,5 @@ export class NavBarComponent implements OnInit {
   changeTheme() {
     console.log ('selected:', this.selectedTheme)
   }
+  
 }

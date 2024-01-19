@@ -1,17 +1,23 @@
 <div class=" p-8">
     <h2>Favourite Todos</h2>
+    <form class="flex justify-center">
+      <mat-form-field class="w-[80%]">
+        <mat-label>Search Task</mat-label>
+        <input (keydown)="onSearch($event)" matInput placeholder="Ex: Learn Angular" type="text" [(ngModel)]="searchTask" [ngModelOptions]="{standalone: true}">  
+      </mat-form-field>
+    </form>
   
     <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="todos"
         class="list" (cdkDropListDropped)="drop($event)">
   
         <!-- ensuring that todos !== undefined -->
       @if (todos?.length === 0){
-        <div class="list-item hover:border-l-4 border-l-red-500 transition-all duration-75">No Todos Yet</div>
+        <div class="list-item hover:border-l-4 border-l-red-500 transition-all duration-75">No Task.</div>
       }@else{
         <!-- displaying the todos -->
         @for (item of todos; track item; let i = $index ) {
           
-          <div class="list-item hover:border-l-4 border-l-blue-500 transition-all duration-75" cdkDrag>
+            <div [ngClass]="blur ? 'blur-xs': 'blur-none'" class="list-item hover:border-l-4 border-l-blue-500 transition-all duration-75" cdkDrag>
             
             <span class="mt-2"><p class="">{{item .task}}</p></span>
             <span class="flex gap-2 items-center">

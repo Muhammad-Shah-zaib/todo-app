@@ -19,6 +19,12 @@ import { MatInputModule } from '@angular/material/input';
 
 })
 export class AllTodosComponent implements OnInit {
+  blur : boolean = false;
+  timer: any;
+  url: string = 'http://localhost:3000/tasks/'
+  task: string = "";
+  todo?: Root2
+  searchTask: string = '';
   todos?: TodoData;
   tempTodos?: TodoData;
   // injecting the http service we made
@@ -104,33 +110,51 @@ export class AllTodosComponent implements OnInit {
     })
   }
 
-  url: string = 'http://localhost:3000/tasks/'
-  task: string = "";
-  todo?: Root2
+  
   generateUniqueNumber(): number {
     const uniqueNumber = Math.floor(Math.random() * 100000000) + 1;
     return uniqueNumber;
   }
 
   addTask(): void {
-    console.log ('task: ', this.task);
+    if ( this.task === '' ) return;
     this.todo = {
       id: this.generateUniqueNumber().toString(),
       task: this.task,
       favourite: false,
       completed: false
     }
-    this.task = "";
-    console.log ('todo: ', this.todo);
-    
-    this.todos?.push(this.todo);
 
-    console.log ('updated: ', this.todos);
+    this.task = "";    
+    this.todos?.push(this.todo);
 
     this.httpService.postData(this.todo).subscribe( () => {
       this.httpService.getData().subscribe( (data: TodoData) => this.todos = data );
-      console.log (this.todos)
     });
 
   }
+  onSearch(event: KeyboardEvent) {
+    // ignoring the special keys
+    if (event.key === 'Backspace' || (event.key === 'Backspace' && event.ctrlKey)){
+      this.Search();
+      return;
+    }
+    if (event.ctrlKey || event.shiftKey || event.altKey || event.key === 'Meta' || event.key === 'Windows' || event.key === 'OS') return;
+    this.blur = true;
+    // Clear the previous timer
+    clearTimeout(this.timer);
+
+    // Set a new timer to perform the search after 250ms
+    this.timer = setTimeout(() => {
+      this.Search();
+    }, 300);
+  }
+  Search(): void {
+    this.blur = false;
+    this.httpService.getData().subscribe( (data: TodoData) => {
+      this.todos = data;
+      this.todos = this.todos?.filter( (todo) => todo.task!.toLowerCase().includes(this.searchTask.toLowerCase()) );
+    });
+  }
+  
 }// ! COMPONENT ENDS HERE

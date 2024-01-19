@@ -5,6 +5,11 @@ import { HttpService } from '../../services/http.service'
 import { JsonPipe } from '@angular/common';
 import { CommonModule } from '@angular/common';
 import { NgClass } from '@angular/common';
+import { MatFormField } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { FormsModule } from '@angular/forms';
 
 
 @Component({
@@ -12,10 +17,13 @@ import { NgClass } from '@angular/common';
   standalone: true,
   templateUrl: './fav-todos.component.html',
   styleUrl: './fav-todos.component.css',
-  imports: [CdkDrag, CdkDropList, JsonPipe, CommonModule, NgClass]
+  imports: [CdkDrag, CdkDropList, JsonPipe, FormsModule, CommonModule, NgClass, MatFormField, MatInputModule, MatIcon, MatButtonModule]
 
 })
 export class FavTodosComponent {
+  timer: any;
+  blur : boolean = false;
+  searchTask: string = '';
   todos?: TodoData;
   tempTodos?: TodoData;
   // injecting the http service we made
@@ -61,6 +69,7 @@ export class FavTodosComponent {
       }) // getData subscribe ends here
     } // updating the data in db.json ends here
 
+
   }// drop functions endss here`
 
 
@@ -94,4 +103,29 @@ export class FavTodosComponent {
       console.log (data);
     })
   }
+
+  onSearch(event: KeyboardEvent) {
+    // ignoring the special keys
+    if (event.key === 'Backspace' || (event.key === 'Backspace' && event.ctrlKey)){
+      this.Search();
+      return;
+    }
+    if (event.ctrlKey || event.shiftKey || event.altKey || event.key === 'Meta' || event.key === 'Windows' || event.key === 'OS') return;
+    this.blur = true;
+    // Clear the previous timer
+    clearTimeout(this.timer);
+
+    // Set a new timer to perform the search after 250ms
+    this.timer = setTimeout(() => {
+      this.Search();
+    }, 300);
+  }
+  Search(): void {
+    this.blur = false;
+    this.httpService.getData().subscribe( (data: TodoData) => {
+      this.todos = data.filter( (data) => data.favourite === true );
+      this.todos = this.todos?.filter( (todo) => todo.task!.toLowerCase().includes(this.searchTask.toLowerCase()) );
+    });
+  }
+  
 }

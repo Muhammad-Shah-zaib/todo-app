@@ -1,34 +1,3 @@
 {
-  "tasks": [
-    {
-      "id": "91151458",
-      "task": "Learn Angular",
-      "favourite": true,
-      "completed": false
-    },
-    {
-      "id": "38277398",
-      "task": "Do Dishes",
-      "favourite": true,
-      "completed": false
-    },
-    {
-      "id": "27054797",
-      "task": "Make projects",
-      "favourite": false,
-      "completed": false
-    },
-    {
-      "id": "82373266",
-      "task": "Learn React",
-      "favourite": false,
-      "completed": true
-    },
-    {
-      "id": "61476844",
-      "task": "Learn Node",
-      "favourite": false,
-      "completed": true
-    }
-  ]
+  "tasks": []
 }
