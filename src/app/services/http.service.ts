@@ -23,7 +23,7 @@ export class HttpService {
   }
 
   // putData() method that is used to update specific task in our db.json
-  putData( task: Root2, id: number ): Observable<TodoData> {
+  putData( task: Root2, id: string | undefined): Observable<TodoData> {
     return this.http.put<TodoData>(this.url + id, task);
   }
 

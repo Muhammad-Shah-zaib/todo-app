@@ -22,7 +22,7 @@ export class CompletedTodosComponent {
   ngOnInit(): void {
     // will use the http service to get the data for todos array
     this.httpService.getData().subscribe( (data: TodoData) => {
-      this.todos = data.filter( (todo) => todo.completed === true);
+      this.todos = data.filter( (data) => data.completed === true );
     } )
 
   }
@@ -52,9 +52,9 @@ export class CompletedTodosComponent {
     }
     for (let  i: number = start; i <= end; i++){
       this.httpService.getData().subscribe( (data) => {
-        this.tempTodos = data.filter ( (todo) => todo.completed === true); // a temporary data to match the ids and update the data in db.json
+        this.tempTodos = data.filter( (data) => data.completed === true ); // a temporary data to match the ids and update the data in db.json
         
-          let tempTodosId: number = Number(this.tempTodos[i].id);
+          let tempTodosId: string | undefined = this.tempTodos[i].id;
           this.updateData( this.todos![i], tempTodosId );
       }) // getData subscribe ends here
     } // updating the data in db.json ends here
@@ -63,13 +63,13 @@ export class CompletedTodosComponent {
 
 
 
-  deleteData( id: string): void {
+  deleteData( id: string | undefined): void {
     console.log (id);
     this.httpService.deleteData(Number(id)).subscribe( (data: TodoData) => {
 
       // get the upated data from db.json
       this.httpService.getData().subscribe( (data: TodoData) => {
-        this.todos = data.filter ( (todo) => todo.completed === true);
+        this.todos = data.filter( (data) => data.completed === true );
         console.log (this.todos);
     }) // getData subscribe ends here
   })  // deleteData subscribe ends here
@@ -79,15 +79,15 @@ export class CompletedTodosComponent {
 
   toggleFav(todo: Root2 ){
     todo.favourite = !todo.favourite;
-    this.updateData(todo, Number(todo.id));
+    this.updateData(todo, todo.id);
   }
 
   toggleComplete( todo: Root2 ){
     todo.completed = !todo.completed;
-    this.updateData(todo, Number(todo.id));
+    this.updateData(todo, todo.id);
   }
 
-  updateData ( todo: Root2, id: number ){
+  updateData ( todo: Root2, id: string | undefined ){
     this.httpService.putData(todo, id).subscribe( (data: TodoData) => {
       console.log (data);
     })
