@@ -59,18 +59,6 @@ export class CompletedTodosComponent {
       start = event.currentIndex;
       end = event.previousIndex;
     }
-    for (let  i: number = start; i <= end; i++){
-      this.httpService.getData().subscribe( (data) => {
-        this.tempTodos = data.filter( (data) => data.completed === true ); // a temporary data to match the ids and update the data in db.json
-        
-          let tempTodosId: string | undefined = this.tempTodos[i].id;
-          this.httpService.putData(this.todos![i], tempTodosId).subscribe( () => {
-            this.httpService.getData().subscribe( data => {this.todos = data.filter( (data) => data.completed === true );
-            });
-          })
-          
-      }) // getData subscribe ends here
-    } // updating the data in db.json ends here
 
   }// drop functions endss here`
 

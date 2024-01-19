@@ -1,33 +1,39 @@
 {
   "tasks": [
     {
-      "id": "98370323",
-      "task": "learn spring",
+      "id": "69915030",
+      "task": "learn .net",
+      "favourite": false,
+      "completed": false
+    },
+    {
+      "id": "46031873",
+      "task": "learn react",
       "favourite": true,
       "completed": false
     },
     {
-      "id": "64757494",
-      "task": "learn angular",
+      "id": "60446005",
+      "task": "learn ts",
+      "favourite": true,
+      "completed": false
+    },
+    {
+      "id": "79939666",
+      "task": "learn pyton",
       "favourite": false,
-      "completed": true
+      "completed": false
     },
     {
-      "id": "5874125",
-      "task": "learn angular",
-      "favourite": true,
-      "completed": true
-    },
-    {
-      "id": "60984805",
+      "id": "333791",
       "task": "learn spring",
-      "favourite": true,
-      "completed": true
+      "favourite": false,
+      "completed": false
     },
     {
-      "id": "97067409",
-      "task": "learn ...",
-      "favourite": true,
+      "id": "27566762",
+      "task": "learn next.js",
+      "favourite": false,
       "completed": false
     }
   ]
