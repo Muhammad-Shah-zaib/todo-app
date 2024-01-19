@@ -8,21 +8,21 @@
     },
     {
       "id": "46031873",
-      "task": "learn react",
-      "favourite": true,
-      "completed": false
-    },
-    {
-      "id": "60446005",
       "task": "learn ts",
       "favourite": true,
       "completed": false
     },
     {
-      "id": "79939666",
+      "id": "60446005",
       "task": "learn pyton",
       "favourite": false,
       "completed": false
+    },
+    {
+      "id": "79939666",
+      "task": "learn react",
+      "favourite": false,
+      "completed": true
     },
     {
       "id": "333791",
