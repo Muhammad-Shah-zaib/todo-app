@@ -1,35 +1,46 @@
 {
   "tasks": [
     {
-      "id": "1",
-      "task": "Learn Ember.js",
-      "isCompleted": true,
-      "favourite": false,
-      "completed": false
-    },
-    {
-      "id": "2",
+      "id": "79223782",
       "task": "Learn Angular",
       "favourite": true,
       "completed": false
     },
     {
-      "id": "3",
-      "task": "Learn Spring",
+      "id": "34778573",
+      "task": "Do Dishes",
       "favourite": true,
       "completed": false
     },
     {
-      "id": "75580135",
-      "task": "ujdnsf",
+      "id": "91151458",
+      "task": "Adding task",
+      "favourite": true,
+      "completed": true
+    },
+    {
+      "id": "38277398",
+      "task": "Adding another task",
+      "favourite": true,
+      "completed": true
+    },
+    {
+      "id": "27054797",
+      "task": "Make projects",
       "favourite": false,
       "completed": false
     },
     {
-      "id": "7873282",
-      "task": "erqg",
+      "id": "82373266",
+      "task": "Learn React",
       "favourite": false,
-      "completed": false
+      "completed": true
+    },
+    {
+      "id": "61476844",
+      "task": "Learn Node",
+      "favourite": false,
+      "completed": true
     }
   ]
 }
