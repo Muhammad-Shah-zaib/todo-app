@@ -65,7 +65,11 @@ export class FavTodosComponent {
         this.tempTodos = data.filter( (data) => data.favourite === true ); // a temporary data to match the ids and update the data in db.json
         
           let tempTodosId: string | undefined = this.tempTodos[i].id;
-          this.updateData( this.todos![i], tempTodosId );
+          this.httpService.putData(this.todos![i], tempTodosId).subscribe( () => {
+            this.httpService.getData().subscribe( data => {this.todos = data.filter( (data) => data.favourite === true );
+            });
+          })
+          
       }) // getData subscribe ends here
     } // updating the data in db.json ends here
 

@@ -1,3 +1,34 @@
 {
-  "tasks": []
+  "tasks": [
+    {
+      "id": "98370323",
+      "task": "learn spring",
+      "favourite": true,
+      "completed": false
+    },
+    {
+      "id": "64757494",
+      "task": "learn angular",
+      "favourite": false,
+      "completed": true
+    },
+    {
+      "id": "5874125",
+      "task": "learn angular",
+      "favourite": true,
+      "completed": true
+    },
+    {
+      "id": "60984805",
+      "task": "learn spring",
+      "favourite": true,
+      "completed": true
+    },
+    {
+      "id": "97067409",
+      "task": "learn ...",
+      "favourite": true,
+      "completed": false
+    }
+  ]
 }
