@@ -7,27 +7,70 @@
             </span>
         </div>
         <div class="bg-slate-100 h-[100%] col-span-3 flex justify-center items-center" >
-            <form class="p-4 flex flex-col gap-4 w-[100%]">
 
+            <!-- CREATING A REACTIVE FORM -->
+            <form [formGroup]="userForm" class="p-4 flex flex-col gap-4 w-[100%]" (ngSubmit)="onSubmit()">
+
+                <div class="flex flex-col">
                 <mat-form-field class="w-[100%]">
+                    <!-- making an input for getting username -->
                     <mat-label>Username</mat-label>
-                    <input matInput type="text" placeholder="Ex: Bret_99">
+                    <input matInput type="text" placeholder="Ex: Bret_99" name="username" formControlName="username" required>
+                    @if ( !userForm.get('username')?.touched ){
+                        <mat-hint class="text-yellow-600">Characters Range for username: 5-25</mat-hint>
+                    }
+
+                    <!-- adding '@' as  suffix -->
+                    <span matTextPrefix class="text-slate-600 font-bold "><p>&#64;&nbsp;</p></span>
+                        
+                    <!-- SHOWING VALIDAITION ERRORS -->
+                    @if( userForm.get('username')?.hasError('required')){
+                        <mat-error>Username is required</mat-error> <!-- ! for required -->
+                    }@else if ( (userForm.get('username')?.hasError('minlength') || userForm.get('username')?.hasError('maxlength')) ) {
+                        <mat-error>Username should be between 5 - 25 characters</mat-error> <!-- ! for chars. length -->
+                    }
+                    @else if ( userForm.get('username')?.hasError('pattern') ){
+                        <mat-error class="text-center">Username should not start with a number and only underscore is required special character</mat-error> <!-- ! for pattern (Regular expression) -->
+                    }
+
+                    
                 </mat-form-field>
 
-                <mat-form-field class="w-[100%]">
+                
+                </div>
+
+                <mat-form-field class="w-[100%]" color="primary">
+                    <!-- making an input for getting password -->
                     <mat-label>Password</mat-label>
-                    <input matInput type="password" placeholder="***">
+                    <input matInput formControlName="password" [type]="hide ? 'password' : 'text'"required>
+
+                    @if ( !userForm.get('password')?.touched ){
+                        <mat-hint class="text-yellow-600">password should possess a lower-case, an upper-case, a digit and a special character</mat-hint>
+                    }
+
+                    <button mat-icon-button matSuffix (click)="hide = !hide" >
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+
+                    @if ( userForm.get('password')?.hasError('required') ) {
+                        <mat-error>Password is required</mat-error>
+                    }@else if ( userForm.get('password')?.hasError('pattern')) {
+                        <mat-error class="text-center">Should have a lower-case, an upper-case, a digit, and special Character and a minimum length of 8</mat-error>
+                    }@else if ( userForm.get('password')?.hasError('minlength') ) {
+                        <mat-error>Minimum length of password: 8 characters</mat-error>
+                    }
                 </mat-form-field>
 
                 <div class="flex justify-between items-center px-8">
                     <span class="w-[100px]">
-                        <button mat-raised-button color="primary" type="submit" class="w-[100%]">Login</button>
+                        <button [disabled]="userForm.invalid" mat-raised-button color="primary" type="submit" class="w-[100%]">Login</button>
                     </span>
 
                     <span class="mt-2">
-                        <p class="text-blue-500 underline decoration-blue-500">Dont have an account?</p>
+                        <p class="text-blue-500 underline decoration-blue-500 text-md">Dont have an account?</p>
                     </span>
                 </div>
+
 
 
             </form>
