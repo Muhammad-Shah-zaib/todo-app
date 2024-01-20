@@ -14,6 +14,7 @@ import { CompletedTodosComponent } from '../todos/completed-todos/completed-todo
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select'
 import { FormsModule } from '@angular/forms';
+import { RouterOutlet, RouterLink } from '@angular/router';
 // import { Router } from '@angular/router';
 
 @Component({
@@ -33,7 +34,9 @@ import { FormsModule } from '@angular/forms';
     CompletedTodosComponent,
     MatInputModule,
     MatSelectModule,
-    FormsModule
+    FormsModule,
+    RouterLink,
+    RouterOutlet
   ]
 })
 export class NavBarComponent implements OnInit {

@@ -9,7 +9,7 @@
         <div class="bg-slate-100 h-[100%] col-span-3 flex justify-center items-center" >
 
             <!-- CREATING A REACTIVE FORM -->
-            <form [formGroup]="userForm" class="p-4 flex flex-col gap-4 w-[100%]" (ngSubmit)="onSubmit()">
+            <form [formGroup]="userForm" class="p-4 flex flex-col gap-4 w-[100%]">
 
                 <div class="flex flex-col">
                 <mat-form-field class="w-[100%]">
@@ -48,7 +48,7 @@
                         <mat-hint class="text-yellow-600">password should possess a lower-case, an upper-case, a digit and a special character</mat-hint>
                     }
 
-                    <button mat-icon-button matSuffix (click)="hide = !hide" >
+                    <button mat-icon-button matSuffix type="button" (click)="hide = !hide" >
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
 
@@ -63,7 +63,7 @@
 
                 <div class="flex justify-between items-center px-8">
                     <span class="w-[100px]">
-                        <button [disabled]="userForm.invalid" mat-raised-button color="primary" type="submit" class="w-[100%]">Login</button>
+                        <button [disabled]="userForm.invalid" mat-raised-button color="primary" (click)="onSubmit()" class="w-[100%]">Login</button>
                     </span>
 
                     <span class="mt-2">

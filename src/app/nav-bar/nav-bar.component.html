@@ -14,21 +14,21 @@
     <mat-nav-list>
       <!-- All tasks -->
       @if (alltodos){
-        <a mat-list-item style="background-color: #cbd5e1;" >ALl Todos</a>
+        <a mat-list-item  style="background-color: #cbd5e1;" >ALl Todos</a>
       }@else {
-        <a mat-list-item (click)="loadAllTodos()">ALl Todos</a>
+        <a mat-list-item routerLink="/allTodos">ALl Todos</a>
       }
       <!-- favourite tasks -->
       @if (favtodos){
         <a mat-list-item style="background-color: #cbd5e1;" >Favourite Todos</a>
       }@else {
-        <a mat-list-item (click)="loadFavTodos()">Favourite Todos</a>
+        <a mat-list-item routerLink="/favouriteTodos" >Favourite Todos</a>
       }
       <!-- completed tasks -->
       @if (completedtodos){
-        <a mat-list-item style="background-color: #cbd5e1;" >Completed Todos</a>
+        <a mat-list-item  style="background-color: #cbd5e1;" >Completed Todos</a>
       }@else {
-        <a mat-list-item (click)="loadCompletedTodos()">Completed Todos</a>
+        <a mat-list-item routerLink="/completedTodos" >Completed Todos</a>
       }
       
 
@@ -60,3 +60,5 @@
     }
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+<router-outlet></router-outlet>
