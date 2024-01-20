@@ -15,7 +15,6 @@ export class ShareUserDataService {
 
   changeState(change: any){
     this.state$.next(change);
-    console.log ('updated the state iside service: ',this.state$);
   }
 
   getState(){

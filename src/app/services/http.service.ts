@@ -19,7 +19,8 @@ export class HttpService implements OnInit{
   // Constructor
   constructor() { 
     this.shareUserDataService.getState().subscribe( (data: any) => {
-      if (typeof(data) !==  'string'){
+      if (data.username === undefined || data.username === null){
+        console.warn('inside heep.service.ts');
         this.router.navigate(['/login']);
       }
       else{

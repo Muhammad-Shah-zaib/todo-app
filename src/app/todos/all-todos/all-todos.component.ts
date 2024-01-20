@@ -9,7 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { Router } from '@angular/router';
+// import { Router } from '@angular/router';
 import { ShareUserDataService } from '../../services/share-user-data.service';
 
 @Component({
@@ -21,7 +21,7 @@ import { ShareUserDataService } from '../../services/share-user-data.service';
 
 })
 export class AllTodosComponent implements OnInit {
-  private router: Router = inject(Router);
+  // private router: Router = inject(Router);
   blur : boolean = false;
   timer: any;
   url: string = 'http://localhost:3000/tasks/'

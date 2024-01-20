@@ -13,6 +13,7 @@ import { ShareUserDataService } from '../../services/share-user-data.service';
   standalone: true,
   imports: [MatButtonModule, MatFormField, RouterOutlet,RouterLink, MatInputModule,MatIconModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
+  // template:`<h1>hellow world</h1>`,
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
@@ -69,7 +70,7 @@ export class LoginComponent implements OnInit {
             
               this.shareUserDataService.changeState(user);
               console.warn ('updated user: ', user);
-              this.router.navigate(['/home']);
+              this.router.navigate(['/alltodos']);
             // this.shareUserDataService.username = this.userForm.value.username;
 
             // uopdating the user id

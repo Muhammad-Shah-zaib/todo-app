@@ -7,17 +7,14 @@ import { SignUpComponent } from './pages/sign-up/sign-up.component';
 export const routes: Routes = [
     { path: 'login', component: LoginComponent},
     { path: 'signup', component: SignUpComponent},
-    { path: 'home', redirectTo: '' },
-    { path: 'todos', redirectTo: '' },
-    { path: 'alltodos', redirectTo: '' },
-    { path: 'favtodos', component: NavBarComponent  },
-    { path: 'favouritetodos', redirectTo: '' },
-    { path: 'favrouites', redirectTo: '' },
-    { path: 'completedtodos', redirectTo: '' },
-    { path: 'completed', redirectTo: '' },
-    { path: 'done', redirectTo: '' },
+    { path: 'allTodos', component: NavBarComponent },
+    { path: 'alltodos', component: NavBarComponent },
+    { path: 'favouriteTodos', component: NavBarComponent },
+    { path: 'favouritetodos', component: NavBarComponent },
+    { path: 'completedTodos', component: NavBarComponent },
+    { path: 'completedtodos', component: NavBarComponent },
 
-    { path: '', component: NavBarComponent },
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'notFound', component: NotFoundComponent},
-    {path: '**', redirectTo: 'notFound'}
+    { path: '**', redirectTo: 'notFound'}
 ];
