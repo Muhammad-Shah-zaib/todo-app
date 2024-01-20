@@ -11,6 +11,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 // import { Router } from '@angular/router';
 import { ShareUserDataService } from '../../services/share-user-data.service';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 
 @Component({
   selector: 'app-all-todos',
@@ -34,8 +35,10 @@ export class AllTodosComponent implements OnInit {
   httpService: HttpService = inject(HttpService);
   public shareUserDataService: ShareUserDataService = inject(ShareUserDataService);
 
+  private loadingBar: LoadingBarService = inject(LoadingBarService);
+
+
   ngOnInit(): void {
-    console.log ('inside ngOnInit of all-todos.component.ts')
     // will use the http service to get the data for todos array
 
     // validating the user has logged in or not
@@ -98,13 +101,15 @@ export class AllTodosComponent implements OnInit {
 
 
   deleteData( id: string | undefined): void {
+    
     console.log (id);
     this.httpService.deleteData(Number(id)).subscribe( (data: TodoData) => {
-
+      this.startLoadingBar();
       // get the upated data from db.json
       this.httpService.getData().subscribe( (data: TodoData) => {
+        
         this.todos = data.filter( (todo) => todo.userId === this.shareUserDataService.id );
-        console.log (this.todos);
+        this.stopLoadingBar();
     }) // getData subscribe ends here
   })  // deleteData subscribe ends here
 
@@ -175,4 +180,16 @@ export class AllTodosComponent implements OnInit {
     });
   }
   
+
+
+
+  startLoadingBar(): void {
+    this.blur = true;
+    this.loadingBar.start();
+  }
+
+  stopLoadingBar(): void {
+    this.blur = false;
+    this.loadingBar.complete();
+  }
 }// ! COMPONENT ENDS HERE

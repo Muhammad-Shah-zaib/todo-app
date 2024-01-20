@@ -11,6 +11,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { ShareUserDataService } from '../../services/share-user-data.service';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 
 
 @Component({
@@ -30,6 +31,7 @@ export class FavTodosComponent {
   // injecting the http service we made
   httpService: HttpService = inject(HttpService);
   public shareUserDataService: ShareUserDataService = inject(ShareUserDataService);
+  private loadingBar: LoadingBarService = inject(LoadingBarService);
 
   ngOnInit(): void {
     // will use the http service to get the data for todos array
@@ -47,8 +49,7 @@ export class FavTodosComponent {
       } // if ends here
     }) // shareUserDataService subscribe ends here
 
-  }
-
+  } // ngOnInit ends here
 
   // Drop Method for Drag and Drop written by CDK, it is also chnging the data in db.json
   drop(event: CdkDragDrop<any>): void {
@@ -88,35 +89,32 @@ export class FavTodosComponent {
 
   }// drop functions endss here`
 
-
-
   deleteData( id: string | undefined): void {
     console.log (id);
     this.httpService.deleteData(Number(id)).subscribe( (data: TodoData) => {
-
+      this.startLoadingBar();
       // get the upated data from db.json
       this.httpService.getData().subscribe( (data: TodoData) => {
         this.todos = data.filter( (data) => data.favourite === true && data.userId === this.shareUserDataService.id );
-    }) // getData subscribe ends here
-  })  // deleteData subscribe ends here
-
-
+        this.stopLoadingBar();
+      }) // getData subscribe ends here
+    })  // deleteData subscribe ends here
   } // deleteData() ends here
 
   toggleFav(todo: Root2 ){
     todo.favourite = !todo.favourite;
     this.updateData(todo, todo.id);
-  }
+  } // toggleFav() ends here
 
   toggleComplete( todo: Root2 ){
     todo.completed = !todo.completed;
     this.updateData(todo, todo.id);
-  }
+  } // toggleComplete() ends here
 
   updateData ( todo: Root2, id: string | undefined ){
     this.httpService.putData(todo, id).subscribe( (data: TodoData) => {
     })
-  }
+  } // updateData() ends here
 
   onSearch(event: KeyboardEvent) {
     // ignoring the special keys
@@ -133,13 +131,23 @@ export class FavTodosComponent {
     this.timer = setTimeout(() => {
       this.Search();
     }, 300);
-  }
+  } // onSearch() ends here
   Search(): void {
     this.blur = false;
     this.httpService.getData().subscribe( (data: TodoData) => {
       this.todos = data.filter( (data) => data.favourite === true );
       this.todos = this.todos?.filter( (todo) => todo.task!.toLowerCase().includes(this.searchTask.toLowerCase()) );
     });
-  }
+  } // Search() ends here
+
+  startLoadingBar(): void {
+    this.blur = true;
+    this.loadingBar.start();
+  } // startLoadingBar() ends here
+
+  stopLoadingBar(): void {
+    this.blur = false;
+    this.loadingBar.complete();
+  } // stopLoadingBar() ends here
   
 }

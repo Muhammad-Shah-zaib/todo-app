@@ -10,6 +10,7 @@ import { MatIcon } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
 import { ShareUserDataService } from '../../services/share-user-data.service';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 
 @Component({
   selector: 'app-completed-todos',
@@ -29,6 +30,8 @@ export class CompletedTodosComponent {
   public shareUserDataService: ShareUserDataService = inject(ShareUserDataService);
   // injecting the http service we made
   private httpService: HttpService = inject(HttpService);
+  private loadingBar: LoadingBarService = inject(LoadingBarService);
+
 
   ngOnInit(): void {
    // will use the http service to get the data for todos array
@@ -68,14 +71,13 @@ export class CompletedTodosComponent {
   deleteData( id: string | undefined): void {
     console.log (id);
     this.httpService.deleteData(Number(id)).subscribe( (data: TodoData) => {
-
+      this.startLoadingBar();
       // get the upated data from db.json
       this.httpService.getData().subscribe( (data: TodoData) => {
-        this.todos = data.filter( (data) => data.completed === true && data.userId === this.shareUserDataService.id);
-    }) // getData subscribe ends here
-  })  // deleteData subscribe ends here
-
-
+        this.todos = data.filter( (data) => data.favourite === true && data.userId === this.shareUserDataService.id );
+        this.stopLoadingBar();
+      }) // getData subscribe ends here
+    })  // deleteData subscribe ends here
   } // deleteData() ends here
 
   toggleFav(todo: Root2 ){
@@ -116,5 +118,14 @@ export class CompletedTodosComponent {
       this.todos = this.todos?.filter( (todo) => todo.task!.toLowerCase().includes(this.searchTask.toLowerCase()) );
     });
   }
-  
+
+  startLoadingBar(): void {
+    this.blur = true;
+    this.loadingBar.start();
+  } // startLoadingBar() ends here
+
+  stopLoadingBar(): void {
+    this.blur = false;
+    this.loadingBar.complete();
+  } // stopLoadingBar() ends here
 }

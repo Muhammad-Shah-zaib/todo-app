@@ -7,6 +7,7 @@ import { UserValidationService } from '../../services/user-validation.service';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { user, userData } from '../../interfaces/loginCredentials';
 import { ShareUserDataService } from '../../services/share-user-data.service';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 
 @Component({
   selector: 'app-login',

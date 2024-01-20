@@ -14,8 +14,8 @@ import { CompletedTodosComponent } from '../todos/completed-todos/completed-todo
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select'
 import { FormsModule } from '@angular/forms';
-import { RouterOutlet, RouterLink } from '@angular/router';
-// import { Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -44,7 +44,7 @@ export class NavBarComponent implements OnInit {
   alltodos: boolean = false;
   favtodos: boolean = false;
   completedtodos: boolean = false;
-  // router: Router= inject(Router);
+  router: Router= inject(Router);
 
   private breakpointObserver = inject(BreakpointObserver);
 
@@ -58,7 +58,15 @@ export class NavBarComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.loadAllTodos();
+    let url = this.router.url;
+    if (/\/(allTodos)/.test(url)){
+      this.loadAllTodos();
+    }else if (/\/(favouriteTodos)/.test(url)){
+      console.warn('favTodos');
+      this.loadFavTodos();
+    }else if (/\/(completedTodos)/.test(url)){
+      this.loadCompletedTodos();
+    }
   }
   loadAllTodos(): void {
     this.alltodos = true;
