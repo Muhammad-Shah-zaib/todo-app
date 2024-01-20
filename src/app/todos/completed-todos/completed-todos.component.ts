@@ -36,11 +36,11 @@ export class CompletedTodosComponent {
     // validating the user has logged in or not
     this.shareUserDataService.getState().subscribe( (data) => {
 
-      if (typeof(data) === 'string'){
+      if (typeof(data) === 'object'){
       
         this.httpService.getData().subscribe( (data: TodoData) => {
           if (data)
-            this.todos = data.filter( (data) => data.completed === true );
+            this.todos = data.filter( (data) => data.completed === true && data.userId === this.shareUserDataService.id );
           
         }) // getData subscribe ends here
       } // if ends here
@@ -61,17 +61,6 @@ export class CompletedTodosComponent {
           event.currentIndex);
     }
 
-    // variables to store the start and end index for the data in db.json updation
-    let start: number, end: number;
-    // updating the data in db.json
-    if ( event.previousIndex < event.currentIndex ) {
-      start = event.previousIndex; 
-      end = event.currentIndex;
-    }else {
-      start = event.currentIndex;
-      end = event.previousIndex;
-    }
-
   }// drop functions endss here`
 
 
@@ -82,8 +71,7 @@ export class CompletedTodosComponent {
 
       // get the upated data from db.json
       this.httpService.getData().subscribe( (data: TodoData) => {
-        this.todos = data.filter( (data) => data.completed === true );
-        console.log (this.todos);
+        this.todos = data.filter( (data) => data.completed === true && data.userId === this.shareUserDataService.id);
     }) // getData subscribe ends here
   })  // deleteData subscribe ends here
 
@@ -102,7 +90,6 @@ export class CompletedTodosComponent {
 
   updateData ( todo: Root2, id: string | undefined ){
     this.httpService.putData(todo, id).subscribe( (data: TodoData) => {
-      console.log (data);
     })
   }
 

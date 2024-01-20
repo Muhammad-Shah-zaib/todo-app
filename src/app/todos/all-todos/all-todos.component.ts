@@ -35,22 +35,25 @@ export class AllTodosComponent implements OnInit {
   public shareUserDataService: ShareUserDataService = inject(ShareUserDataService);
 
   ngOnInit(): void {
+    console.log ('inside ngOnInit of all-todos.component.ts')
     // will use the http service to get the data for todos array
 
     // validating the user has logged in or not
     this.shareUserDataService.getState().subscribe( (data) => {
 
-      if (typeof(data) === 'string'){
+      if (typeof(data) === 'object'){
       
         this.httpService.getData().subscribe( (data: TodoData) => {
           if (data)
-            this.todos = data;
+            this.todos = data.filter( (todo) => todo.userId === this.shareUserDataService.id );
           
         }, (err) => {
           alert('Looks like Admin has not given you access, try again later.');
           this.router.navigate(['/login']);
         }) // getData subscribe ends here
       } // if ends here
+    }, (err)=> {
+      alert('Something went Wrong, try again later.');
     }) // shareUserDataService subscribe ends here
   } // ngOninit ends here
 
@@ -79,11 +82,11 @@ export class AllTodosComponent implements OnInit {
     }
     for (let  i: number = start; i <= end; i++){
       this.httpService.getData().subscribe( (data) => {
-        this.tempTodos = data; // a temporary data to match the ids and update the data in db.json
+        this.tempTodos = data.filter((data) => data.userId === this.shareUserDataService.id); // a temporary data to match the ids and update the data in db.json
         
           let tempTodosId: string | undefined = this.tempTodos[i].id;
           this.httpService.putData(this.todos![i], tempTodosId).subscribe( () => {
-            this.httpService.getData().subscribe( data => {this.todos = data});
+            this.httpService.getData().subscribe( data => {this.todos = data.filter((data) => data.userId === this.shareUserDataService.id)});
           })
           
       }) // getData subscribe ends here
@@ -99,7 +102,7 @@ export class AllTodosComponent implements OnInit {
 
       // get the upated data from db.json
       this.httpService.getData().subscribe( (data: TodoData) => {
-        this.todos = data
+        this.todos = data.filter( (todo) => todo.userId === this.shareUserDataService.id );
         console.log (this.todos);
     }) // getData subscribe ends here
   })  // deleteData subscribe ends here
@@ -118,7 +121,6 @@ export class AllTodosComponent implements OnInit {
   }
 
   updateData ( todo: Root2, id: string | undefined ){
-    console.log (id);
     this.httpService.putData(todo, id).subscribe( (data: TodoData) => {
       console.log (data);
     })
@@ -134,6 +136,7 @@ export class AllTodosComponent implements OnInit {
     if ( this.task === '' ) return;
     this.todo = {
       id: this.generateUniqueNumber().toString(),
+      userId: this.shareUserDataService.id,
       task: this.task,
       favourite: false,
       completed: false
@@ -143,7 +146,7 @@ export class AllTodosComponent implements OnInit {
     this.todos?.push(this.todo);
 
     this.httpService.postData(this.todo).subscribe( () => {
-      this.httpService.getData().subscribe( (data: TodoData) => this.todos = data );
+      this.httpService.getData().subscribe( (data: TodoData) => this.todos = data.filter( (todo) => todo.userId === this.shareUserDataService.id ) );
     });
 
   }
@@ -166,7 +169,7 @@ export class AllTodosComponent implements OnInit {
   Search(): void {
     this.blur = false;
     this.httpService.getData().subscribe( (data: TodoData) => {
-      this.todos = data;
+      this.todos = data.filter( (todo) => todo.userId === this.shareUserDataService.id );
       this.todos = this.todos?.filter( (todo) => todo.task!.toLowerCase().includes(this.searchTask.toLowerCase()) );
     });
   }

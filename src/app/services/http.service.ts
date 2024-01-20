@@ -14,7 +14,7 @@ export class HttpService implements OnInit{
   public shareUserDataService: ShareUserDataService = inject(ShareUserDataService);
 
   http: HttpClient = inject(HttpClient);
-  url: string = '';
+  url: string = 'http://localhost:3000/tasks/';
 
   // Constructor
   constructor() { 
@@ -22,8 +22,8 @@ export class HttpService implements OnInit{
       if (typeof(data) !==  'string'){
         this.router.navigate(['/login']);
       }
-      if (data){
-        this.url = 'http://localhost:3000/' + data + '/';
+      else{
+        this.url = 'http://localhost:3000/tasks/';
       }
     })
   }

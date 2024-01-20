@@ -66,7 +66,12 @@ export class LoginComponent implements OnInit {
           if (user) {
             this.router.navigate(['/home']);
             // this.shareUserDataService.username = this.userForm.value.username;
-            this.shareUserDataService.changeState(this.userForm.value.username);
+
+            // uopdating the user id
+            if (user.id !== undefined)
+              this.shareUserDataService.id = user.id;
+            console.log ('updated id: ', this.shareUserDataService.id);
+            // console.log('id: ',user.id);
           }else {
             // alert('Invalid username or password');
             this.submitStatus = true;

@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 export class ShareUserDataService {
   public username: any = '';
   password: string = '';
+  public id: string = '';
   private state$ = new BehaviorSubject<any>({});
 
   
@@ -14,6 +15,7 @@ export class ShareUserDataService {
 
   changeState(change: any){
     this.state$.next(change);
+    console.log ('updated the state iside service: ',this.state$);
   }
 
   getState(){

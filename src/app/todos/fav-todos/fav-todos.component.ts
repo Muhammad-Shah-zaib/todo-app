@@ -37,11 +37,11 @@ export class FavTodosComponent {
     // validating the user has logged in or not
     this.shareUserDataService.getState().subscribe( (data) => {
 
-      if (typeof(data) === 'string'){
+      if (typeof(data) === 'object'){
       
         this.httpService.getData().subscribe( (data: TodoData) => {
           if (data)
-            this.todos = data.filter( (data) => data.favourite === true );
+            this.todos = data.filter( (data) => data.favourite === true && data.userId === this.shareUserDataService.id );
           
         }) // getData subscribe ends here
       } // if ends here
@@ -96,8 +96,7 @@ export class FavTodosComponent {
 
       // get the upated data from db.json
       this.httpService.getData().subscribe( (data: TodoData) => {
-        this.todos = data.filter( (data) => data.favourite === true );
-        console.log (this.todos);
+        this.todos = data.filter( (data) => data.favourite === true && data.userId === this.shareUserDataService.id );
     }) // getData subscribe ends here
   })  // deleteData subscribe ends here
 
@@ -116,7 +115,6 @@ export class FavTodosComponent {
 
   updateData ( todo: Root2, id: string | undefined ){
     this.httpService.putData(todo, id).subscribe( (data: TodoData) => {
-      console.log (data);
     })
   }
 
