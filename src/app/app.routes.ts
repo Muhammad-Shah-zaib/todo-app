@@ -1,12 +1,14 @@
 import { Routes } from '@angular/router';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { LoginComponent } from './pages/login/login.component';
 
 export const routes: Routes = [
+    { path: 'login', component: LoginComponent},
     { path: 'home', redirectTo: '' },
     { path: 'todos', redirectTo: '' },
     { path: 'alltodos', redirectTo: '' },
-    { path: 'favtodos', redirectTo: '' },
+    { path: 'favtodos', component: NavBarComponent  },
     { path: 'favouritetodos', redirectTo: '' },
     { path: 'favrouites', redirectTo: '' },
     { path: 'completedtodos', redirectTo: '' },
