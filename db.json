@@ -1,41 +1,48 @@
 {
   "registrations": [
-
+    {
+      "id": "2595",
+      "username": "Bret_99",
+      "password": "hakunaMATATA_21",
+      "tasks": []
+    },
+    {
+      "id": "2595",
+      "username": "Bretty",
+      "password": "hakunaMATATA_21",
+      "tasks": []
+    },
+    {
+      "id": "4bcf",
+      "username": "me_123",
+      "password": "Me_12345",
+      "tasks": []
+    },
+    {
+      "id": "00a3",
+      "username": "Berly",
+      "password": "Berly_123"
+    }
   ],
-  "tasks": [
+  "Berly": [
     {
-      "id": "69915030",
-      "task": "learn .net",
+      "id": "92425139",
+      "task": "Learn Angular",
       "favourite": false,
       "completed": false
-    },
+    }
+  ],
+  "Bret_99": [],
+  "me_123": [
     {
-      "id": "46031873",
-      "task": "learn ts",
-      "favourite": true,
-      "completed": false
-    },
-    {
-      "id": "60446005",
-      "task": "learn pyton",
-      "favourite": false,
-      "completed": false
-    },
-    {
-      "id": "79939666",
-      "task": "learn react",
+      "id": "95425475",
+      "task": "Addinf second Task",
       "favourite": false,
       "completed": true
     },
     {
-      "id": "333791",
-      "task": "learn spring",
-      "favourite": false,
-      "completed": false
-    },
-    {
-      "id": "27566762",
-      "task": "learn next.js",
+      "id": "36176416",
+      "task": "Adding first task",
       "favourite": false,
       "completed": false
     }

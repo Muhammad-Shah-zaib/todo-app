@@ -9,6 +9,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { ShareUserDataService } from '../../services/share-user-data.service';
 
 @Component({
   selector: 'app-completed-todos',
@@ -25,14 +26,25 @@ export class CompletedTodosComponent {
   todos?: TodoData;
   tempTodos?: TodoData;
 
+  public shareUserDataService: ShareUserDataService = inject(ShareUserDataService);
   // injecting the http service we made
   private httpService: HttpService = inject(HttpService);
 
   ngOnInit(): void {
-    // will use the http service to get the data for todos array
-    this.httpService.getData().subscribe( (data: TodoData) => {
-      this.todos = data.filter( (data) => data.completed === true );
-    } )
+   // will use the http service to get the data for todos array
+
+    // validating the user has logged in or not
+    this.shareUserDataService.getState().subscribe( (data) => {
+
+      if (typeof(data) === 'string'){
+      
+        this.httpService.getData().subscribe( (data: TodoData) => {
+          if (data)
+            this.todos = data.filter( (data) => data.completed === true );
+          
+        }) // getData subscribe ends here
+      } // if ends here
+    }) // shareUserDataService subscribe ends here
 
   }
 

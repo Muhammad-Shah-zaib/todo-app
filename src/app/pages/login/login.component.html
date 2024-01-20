@@ -24,7 +24,9 @@
                     <span matTextPrefix class="text-slate-600 font-bold "><p>&#64;&nbsp;</p></span>
                         
                     <!-- SHOWING VALIDAITION ERRORS -->
-                    @if( userForm.get('username')?.hasError('required')){
+                    @if (submitStatus){
+                        <mat-error>Incorrect Username or Password</mat-error>
+                    }@else if( userForm.get('username')?.hasError('required')){
                         <mat-error>Username is required</mat-error> <!-- ! for required -->
                     }@else if ( (userForm.get('username')?.hasError('minlength') || userForm.get('username')?.hasError('maxlength')) ) {
                         <mat-error>Username should be between 5 - 25 characters</mat-error> <!-- ! for chars. length -->
@@ -52,7 +54,9 @@
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
 
-                    @if ( userForm.get('password')?.hasError('required') ) {
+                    @if (submitStatus){
+                        <mat-error>Incorrect Username or Password</mat-error>
+                    }@else if ( userForm.get('password')?.hasError('required') ) {
                         <mat-error>Password is required</mat-error>
                     }@else if ( userForm.get('password')?.hasError('pattern')) {
                         <mat-error class="text-center">Should have a lower-case, an upper-case, a digit, and special Character and a minimum length of 8</mat-error>
@@ -67,10 +71,11 @@
                     </span>
 
                     <span class="mt-2">
-                        <p class="text-blue-500 underline decoration-blue-500 text-md">Dont have an account?</p>
+                        <a routerLink="/signup" routerLinkActive="active" class="text-blue-500 underline decoration-blue-500 text-md cursor-pointer">Don't have an account?</a>
                     </span>
+                    
                 </div>
-
+                <router-outlet></router-outlet>
 
 
             </form>
@@ -78,3 +83,4 @@
     </span>
 
 </div>
+

@@ -9,6 +9,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { Router } from '@angular/router';
+import { ShareUserDataService } from '../../services/share-user-data.service';
 
 @Component({
   selector: 'app-all-todos',
@@ -19,6 +21,7 @@ import { MatInputModule } from '@angular/material/input';
 
 })
 export class AllTodosComponent implements OnInit {
+  private router: Router = inject(Router);
   blur : boolean = false;
   timer: any;
   url: string = 'http://localhost:3000/tasks/'
@@ -29,14 +32,27 @@ export class AllTodosComponent implements OnInit {
   tempTodos?: TodoData;
   // injecting the http service we made
   httpService: HttpService = inject(HttpService);
+  public shareUserDataService: ShareUserDataService = inject(ShareUserDataService);
 
   ngOnInit(): void {
     // will use the http service to get the data for todos array
-    this.httpService.getData().subscribe( (data: TodoData) => {
-      this.todos = data;
-    } )
 
-  }
+    // validating the user has logged in or not
+    this.shareUserDataService.getState().subscribe( (data) => {
+
+      if (typeof(data) === 'string'){
+      
+        this.httpService.getData().subscribe( (data: TodoData) => {
+          if (data)
+            this.todos = data;
+          
+        }, (err) => {
+          alert('Looks like Admin has not given you access, try again later.');
+          this.router.navigate(['/login']);
+        }) // getData subscribe ends here
+      } // if ends here
+    }) // shareUserDataService subscribe ends here
+  } // ngOninit ends here
 
 
   // Drop Method for Drag and Drop written by CDK, it is also chnging the data in db.json

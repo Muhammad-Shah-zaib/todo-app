@@ -10,6 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { FormsModule } from '@angular/forms';
+import { ShareUserDataService } from '../../services/share-user-data.service';
 
 
 @Component({
@@ -28,12 +29,23 @@ export class FavTodosComponent {
   tempTodos?: TodoData;
   // injecting the http service we made
   httpService: HttpService = inject(HttpService);
+  public shareUserDataService: ShareUserDataService = inject(ShareUserDataService);
 
   ngOnInit(): void {
     // will use the http service to get the data for todos array
-    this.httpService.getData().subscribe( (data: TodoData) => {
-      this.todos = data.filter( (data) => data.favourite === true );
-    } )
+
+    // validating the user has logged in or not
+    this.shareUserDataService.getState().subscribe( (data) => {
+
+      if (typeof(data) === 'string'){
+      
+        this.httpService.getData().subscribe( (data: TodoData) => {
+          if (data)
+            this.todos = data.filter( (data) => data.favourite === true );
+          
+        }) // getData subscribe ends here
+      } // if ends here
+    }) // shareUserDataService subscribe ends here
 
   }
 

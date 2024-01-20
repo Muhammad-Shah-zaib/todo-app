@@ -1,24 +1,27 @@
-import { Component, OnInit } from '@angular/core';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormField } from '@angular/material/input';
+import { Component, OnInit, inject } from '@angular/core';
+import { MatInputModule, MatFormField } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { UserValidationService } from '../../services/user-validation.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { user, userData } from '../../interfaces/loginCredentials';
+import { ShareUserDataService } from '../../services/share-user-data.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MatButtonModule, MatFormField, MatInputModule,MatIconModule, ReactiveFormsModule],
+  imports: [MatButtonModule, MatFormField, RouterOutlet,RouterLink, MatInputModule,MatIconModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent implements OnInit {
+  submitStatus: boolean = false;
   hide: boolean = true;
   // making a property for checking particular element is focused or not
   isFocused: boolean = false;
+
+  public shareUserDataService: ShareUserDataService = inject(ShareUserDataService);
 
   private validateService: UserValidationService = new UserValidationService();
   private router: Router = new Router();
@@ -29,8 +32,8 @@ export class LoginComponent implements OnInit {
     username: new FormControl<string>('', [Validators.required, Validators.pattern('^[a-zA-Z][_a-zA-Z0-9]*$'), Validators.minLength(5), Validators.maxLength(25) ]),
 
     // makking password FormControl
-    // password: new FormControl<string>('', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[_+\\-@$!%*#?&]).+$'), Validators.minLength(8)])
-    password: new FormControl<string>('', [Validators.required, Validators.minLength(8)])
+    password: new FormControl<string>('', [Validators.required, Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[_+\\-@$!%*#?&]).+$'), Validators.minLength(8)])
+    // password: new FormControl<string>('', [Validators.required, Validators.minLength(8)])
     
   })
 
@@ -55,11 +58,24 @@ export class LoginComponent implements OnInit {
     if ((this.userForm.value.username !== undefined && this.userForm.value.username !== null )
       && (this.userForm.value.password !== undefined && this.userForm.value.password !== null)){
     
-        if (this.validateService.checkLoginCredentials( this.userForm.value.username, this.userForm.value.password)) {
-          this.router.navigate(['/home']);
-        }else {
-          alert('Incorrect')
-        }
+        this.validateService.getData().subscribe( (data: userData) => {
+          let user = data.find( (user: user) => {
+            return user.username === this.userForm.value.username && user.password === this.userForm.value.password;
+          })
+
+          if (user) {
+            this.router.navigate(['/home']);
+            // this.shareUserDataService.username = this.userForm.value.username;
+            this.shareUserDataService.changeState(this.userForm.value.username);
+          }else {
+            // alert('Invalid username or password');
+            this.submitStatus = true;
+            this.userForm.reset();
+          }
+        },(err)=> {
+          alert('An error has occured please try again later.');
+          this.router.navigate(['/login']);
+        })
       }
   }
 }
