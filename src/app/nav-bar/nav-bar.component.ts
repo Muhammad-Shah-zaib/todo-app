@@ -55,15 +55,14 @@ export class NavBarComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    let url = this.router.url;
-    console.log(url);
-    if (/\/(alltodos|home|todos|)/.test(url)){
-      this.loadAllTodos();
-    }else if (/\/(favtodos|favouritetodos|favrouites)/.test(url)){
-      this.loadFavTodos();
-    }else if (/\/(completedtodos|completed|done)/.test(url)){
-      this.loadCompletedTodos();
-    }
+    // let url = this.router.url;
+    // if (/\/(alltodos|home|todos|)/.test(url)){
+    //   this.loadAllTodos();
+    // }else if (/\/(favtodos|favouritetodos|favrouites)/.test(url)){
+    //   this.loadFavTodos();
+    // }else if (/\/(completedtodos|completed|done)/.test(url)){
+    //   this.loadCompletedTodos();
+    // }
   }
   loadAllTodos(): void {
     this.alltodos = true;

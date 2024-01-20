@@ -40,21 +40,22 @@ export class AllTodosComponent implements OnInit {
 
     // validating the user has logged in or not
     this.shareUserDataService.getState().subscribe( (data) => {
+      if (data.username === undefined || data.username === null){
+        console.warn('No name: ', data);
+        // this.router.navigate(['/login']);
+        
+      }else{
+      
+      console.warn('inside the share_user_service');
 
-      if (typeof(data) === 'object'){
       
         this.httpService.getData().subscribe( (data: TodoData) => {
-          if (data)
+          if (data){
             this.todos = data.filter( (todo) => todo.userId === this.shareUserDataService.id );
-          
-        }, (err) => {
-          alert('Looks like Admin has not given you access, try again later.');
-          this.router.navigate(['/login']);
+          }
         }) // getData subscribe ends here
-      } // if ends here
-    }, (err)=> {
-      alert('Something went Wrong, try again later.');
-    }) // shareUserDataService subscribe ends here
+      } // else ends here
+    }); // shareUserDataService subscribe ends here
   } // ngOninit ends here
 
 

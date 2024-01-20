@@ -54,7 +54,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log(this.userForm.value);
+    console.error('onSUbmit is trigered');
     if ((this.userForm.value.username !== undefined && this.userForm.value.username !== null )
       && (this.userForm.value.password !== undefined && this.userForm.value.password !== null)){
     
@@ -64,13 +64,16 @@ export class LoginComponent implements OnInit {
           })
 
           if (user) {
-            this.router.navigate(['/home']);
+            if (user.id !== undefined)
+              this.shareUserDataService.id = user.id;
+            
+              this.shareUserDataService.changeState(user);
+              console.warn ('updated user: ', user);
+              this.router.navigate(['/home']);
             // this.shareUserDataService.username = this.userForm.value.username;
 
             // uopdating the user id
-            if (user.id !== undefined)
-              this.shareUserDataService.id = user.id;
-            console.log ('updated id: ', this.shareUserDataService.id);
+            
             // console.log('id: ',user.id);
           }else {
             // alert('Invalid username or password');

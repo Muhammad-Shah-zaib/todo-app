@@ -52,6 +52,6 @@ export class SignUpComponent {
   }
 
   onSubmit(): void {
-    this.regiterService.addNewUser(this.userForm.value, this.userForm.value)
+    this.regiterService.addNewUser(this.userForm.value)
   }
 }
