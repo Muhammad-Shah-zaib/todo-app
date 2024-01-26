@@ -1,4 +1,8 @@
 import { Injectable } from '@angular/core';
+<<<<<<< HEAD
+=======
+import { Observable } from 'rxjs';
+>>>>>>> chekciing
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 @Injectable({
@@ -17,7 +21,11 @@ export class ShareUserDataService {
     this.state$.next(change);
   }
 
+<<<<<<< HEAD
   getState(){
+=======
+  getState(): Observable<any>{
+>>>>>>> chekciing
     return this.state$.asObservable();
   }
 }

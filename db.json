@@ -37,6 +37,14 @@
       "id": "eba5",
       "username": "me_123",
       "password": "Me_12345"
+<<<<<<< HEAD
+=======
+    },
+    {
+      "id": "35bd",
+      "username": "jahanzaib",
+      "password": "Jahanzaib@1"
+>>>>>>> chekciing
     }
   ],
   "tasks": [
@@ -44,6 +52,8 @@
       "id": "56562140",
       "userID": "2595",
       "task": "DONT LOG THIS ......................",
+<<<<<<< HEAD
+=======
       "favourite": false,
       "completed": false
     },
@@ -69,13 +79,114 @@
       "completed": false
     },
     {
-      "id": "4951036",
+      "id": "70785679",
       "userId": "4bcf",
       "task": "ading",
       "favourite": false,
       "completed": false
     },
     {
+      "id": "89348248",
+      "userId": "35bd",
+      "task": "Learn rXjs",
+      "favourite": true,
+      "completed": true
+    },
+    {
+      "id": "67395641",
+      "userId": "35bd",
+      "task": "Learn express",
+      "favourite": false,
+      "completed": false
+    },
+    {
+      "id": "99595413",
+      "userId": "35bd",
+      "task": "Learn node js",
+      "favourite": true,
+      "completed": false
+    },
+    {
+      "id": "8003894",
+      "userId": "35bd",
+      "task": "learn .net",
+>>>>>>> chekciing
+      "favourite": false,
+      "completed": false
+    },
+    {
+<<<<<<< HEAD
+      "id": "28180246",
+      "userID": "2595",
+      "task": "DONT LOG THIS ......................",
+      "favourite": false,
+      "completed": false
+    },
+    {
+      "id": "1739057",
+      "userId": "5d07",
+      "task": "lplplplp4",
+=======
+      "id": "87998773",
+      "userId": "35bd",
+      "task": "Learn Angular",
+      "favourite": true,
+      "completed": true
+    },
+    {
+      "id": "19104372",
+      "userId": "4bcf",
+      "task": "adding task for complete 2",
+>>>>>>> chekciing
+      "favourite": false,
+      "completed": true
+    },
+    {
+<<<<<<< HEAD
+      "id": "58535528",
+      "userId": "5d07",
+      "task": "awawwaw",
+=======
+      "id": "19807969",
+      "userId": "4bcf",
+      "task": "adding task for complete1",
+      "favourite": false,
+      "completed": true
+    },
+    {
+      "id": "46960193",
+      "userId": "4bcf",
+      "task": "adding task for fav 1",
+>>>>>>> chekciing
+      "favourite": true,
+      "completed": false
+    },
+    {
+<<<<<<< HEAD
+      "id": "4951036",
+      "userId": "4bcf",
+      "task": "ading",
+=======
+      "id": "9964995",
+      "userId": "4bcf",
+      "task": "adding task for fav 2",
+      "favourite": true,
+      "completed": false
+    }
+  ],
+  "Berly": [
+    {
+      "id": "92425139",
+      "task": "Learn Angular",
+>>>>>>> chekciing
+      "favourite": false,
+      "completed": false
+    }
+  ],
+  "Bret_99": [],
+  "me_123": [
+    {
+<<<<<<< HEAD
       "id": "48651344",
       "userId": "4bcf",
       "task": "ading",
@@ -97,6 +208,11 @@
       "id": "95425475",
       "task": "Addinf second Task",
       "favourite": false,
+=======
+      "id": "95425475",
+      "task": "Addinf second Task",
+      "favourite": false,
+>>>>>>> chekciing
       "completed": true
     },
     {

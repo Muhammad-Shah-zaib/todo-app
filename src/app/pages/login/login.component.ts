@@ -71,7 +71,11 @@ export class LoginComponent implements OnInit {
             
               this.shareUserDataService.changeState(user);
               console.warn ('updated user: ', user);
+<<<<<<< HEAD
               this.router.navigate(['/alltodos']);
+=======
+              this.router.navigate(['/home']);
+>>>>>>> chekciing
             // this.shareUserDataService.username = this.userForm.value.username;
 
             // uopdating the user id

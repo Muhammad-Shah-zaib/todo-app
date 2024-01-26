@@ -18,6 +18,7 @@ export class HttpService implements OnInit{
 
   // Constructor
   constructor() { 
+<<<<<<< HEAD
     this.shareUserDataService.getState().subscribe( (data: any) => {
       if (data.username === undefined || data.username === null){
         console.warn('inside heep.service.ts');
@@ -27,6 +28,9 @@ export class HttpService implements OnInit{
         this.url = 'http://localhost:3000/tasks/';
       }
     })
+=======
+    this.url = 'http://localhost:3000/tasks/';
+>>>>>>> chekciing
   }
 
   // getData() method that is used to get all tasks from our db.json

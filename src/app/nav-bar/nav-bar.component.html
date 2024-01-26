@@ -13,6 +13,7 @@
     </mat-toolbar>
     <mat-nav-list>
       <!-- All tasks -->
+<<<<<<< HEAD
       @if (alltodos){
         <a mat-list-item  style="background-color: #cbd5e1;" >ALl Todos</a>
       }@else {
@@ -31,6 +32,15 @@
         <a mat-list-item routerLink="/completedTodos" >Completed Todos</a>
       }
       
+=======
+      <a mat-list-item routerLink="/home/alltodos" id="alltodos">All Todos</a>
+
+      <!-- favourite tasks -->
+      <a mat-list-item routerLink="/home/favtodos">Favourite Todos</a>
+
+      <!-- completed tasks -->
+      <a mat-list-item routerLink="/home/completedtodos">Completed Todos</a>
+>>>>>>> chekciing
 
     </mat-nav-list>
   </mat-sidenav>
@@ -50,15 +60,13 @@
       <span>Manage Your Todos</span>
     
     </mat-toolbar>
-    <!-- write content here -->
-    @if (alltodos){
-      <app-all-todos class="bg-zinc-100"></app-all-todos>
-    }@else if (favtodos){
-      <app-fav-todos></app-fav-todos>
-    }@else if (completedtodos){
-      <app-completed-todos></app-completed-todos>
-    }
+
+  <router-outlet></router-outlet>
+
   </mat-sidenav-content>
 </mat-sidenav-container>
 
+<<<<<<< HEAD
 <router-outlet></router-outlet>
+=======
+>>>>>>> chekciing

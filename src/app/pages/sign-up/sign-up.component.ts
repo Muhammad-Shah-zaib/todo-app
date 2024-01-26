@@ -54,4 +54,16 @@ export class SignUpComponent {
   onSubmit(): void {
     this.regiterService.addNewUser(this.userForm.value)
   }
+<<<<<<< HEAD
+=======
+
+
+  canExit(): boolean {
+    if (this.userForm.get('username')?.value !== '' || this.userForm.get('password')?.value !== ''){
+      return confirm("There are some unsaved changes, Are you sure you want to leave?");
+    }
+
+    return true;
+  }
+>>>>>>> chekciing
 }
