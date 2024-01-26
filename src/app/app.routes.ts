@@ -1,19 +1,20 @@
+// app.routes.ts
+
 import { Routes } from '@angular/router';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { LoginComponent } from './pages/login/login.component';
+import { SignUpComponent } from './pages/sign-up/sign-up.component';
+import {  canActivate as canActivateFn, canActivateChild as canActivateChildFn } from '../app/auth-guards/canActivate';
+import { canDeactivateFn } from './auth-guards/deActivate';
+import { canLoadFn } from './auth-guards/canLoad';
+
 
 export const routes: Routes = [
-    { path: 'home', redirectTo: '' },
-    { path: 'todos', redirectTo: '' },
-    { path: 'alltodos', redirectTo: '' },
-    { path: 'favtodos', redirectTo: '' },
-    { path: 'favouritetodos', redirectTo: '' },
-    { path: 'favrouites', redirectTo: '' },
-    { path: 'completedtodos', redirectTo: '' },
-    { path: 'completed', redirectTo: '' },
-    { path: 'done', redirectTo: '' },
-
-    { path: '', component: NavBarComponent },
-    { path: 'notFound', component: NotFoundComponent},
-    {path: '**', redirectTo: 'notFound'}
+    { path: 'login', component: LoginComponent },
+    { path: 'signup', component: SignUpComponent, canDeactivate: [canDeactivateFn] },
+    { path: 'home', component: NavBarComponent, canMatch: [canLoadFn], canActivateChild:[canActivateChildFn],loadChildren: () => import('./lazy_loading/nav-bar.routes') },
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: 'notFound', component: NotFoundComponent },
+    { path: '**', redirectTo: 'notFound' }
 ];

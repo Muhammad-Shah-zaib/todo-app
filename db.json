@@ -1,38 +1,168 @@
 {
+  "registrations": [
+    {
+      "id": "2595",
+      "username": "Bret_99",
+      "password": "hakunaMATATA_21",
+      "tasks": []
+    },
+    {
+      "id": "29555",
+      "username": "Bretty",
+      "password": "hakunaMATATA_21",
+      "tasks": []
+    },
+    {
+      "id": "4bcf",
+      "username": "me_123",
+      "password": "Me_12345",
+      "tasks": []
+    },
+    {
+      "id": "00a3",
+      "username": "Berly",
+      "password": "Berly_123"
+    },
+    {
+      "id": "fa1b",
+      "username": "Hola_Bola",
+      "password": "Hole_213"
+    },
+    {
+      "id": "5d07",
+      "username": "polipoli",
+      "password": "Poli@123"
+    },
+    {
+      "id": "eba5",
+      "username": "me_123",
+      "password": "Me_12345"
+    },
+    {
+      "id": "35bd",
+      "username": "jahanzaib",
+      "password": "Jahanzaib@1"
+    }
+  ],
   "tasks": [
     {
-      "id": "69915030",
+      "id": "56562140",
+      "userID": "2595",
+      "task": "DONT LOG THIS ......................",
+      "favourite": false,
+      "completed": false
+    },
+    {
+      "id": "28180246",
+      "userID": "2595",
+      "task": "DONT LOG THIS ......................",
+      "favourite": false,
+      "completed": false
+    },
+    {
+      "id": "1739057",
+      "userId": "5d07",
+      "task": "lplplplp4",
+      "favourite": false,
+      "completed": true
+    },
+    {
+      "id": "58535528",
+      "userId": "5d07",
+      "task": "awawwaw",
+      "favourite": true,
+      "completed": false
+    },
+    {
+      "id": "70785679",
+      "userId": "4bcf",
+      "task": "ading",
+      "favourite": false,
+      "completed": false
+    },
+    {
+      "id": "89348248",
+      "userId": "35bd",
+      "task": "Learn rXjs",
+      "favourite": true,
+      "completed": true
+    },
+    {
+      "id": "67395641",
+      "userId": "35bd",
+      "task": "Learn express",
+      "favourite": false,
+      "completed": false
+    },
+    {
+      "id": "99595413",
+      "userId": "35bd",
+      "task": "Learn node js",
+      "favourite": true,
+      "completed": false
+    },
+    {
+      "id": "8003894",
+      "userId": "35bd",
       "task": "learn .net",
       "favourite": false,
       "completed": false
     },
     {
-      "id": "46031873",
-      "task": "learn react",
+      "id": "87998773",
+      "userId": "35bd",
+      "task": "Learn Angular",
+      "favourite": true,
+      "completed": true
+    },
+    {
+      "id": "19104372",
+      "userId": "4bcf",
+      "task": "adding task for complete 2",
+      "favourite": false,
+      "completed": true
+    },
+    {
+      "id": "19807969",
+      "userId": "4bcf",
+      "task": "adding task for complete1",
+      "favourite": false,
+      "completed": true
+    },
+    {
+      "id": "46960193",
+      "userId": "4bcf",
+      "task": "adding task for fav 1",
       "favourite": true,
       "completed": false
     },
     {
-      "id": "60446005",
-      "task": "learn ts",
+      "id": "9964995",
+      "userId": "4bcf",
+      "task": "adding task for fav 2",
       "favourite": true,
       "completed": false
-    },
+    }
+  ],
+  "Berly": [
     {
-      "id": "79939666",
-      "task": "learn pyton",
+      "id": "92425139",
+      "task": "Learn Angular",
       "favourite": false,
       "completed": false
-    },
+    }
+  ],
+  "Bret_99": [],
+  "me_123": [
     {
-      "id": "333791",
-      "task": "learn spring",
+      "id": "95425475",
+      "task": "Addinf second Task",
       "favourite": false,
-      "completed": false
+      "completed": true
     },
     {
-      "id": "27566762",
-      "task": "learn next.js",
+      "id": "36176416",
+      "task": "Adding first task",
       "favourite": false,
       "completed": false
     }

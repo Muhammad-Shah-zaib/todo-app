@@ -13,24 +13,13 @@
     </mat-toolbar>
     <mat-nav-list>
       <!-- All tasks -->
-      @if (alltodos){
-        <a mat-list-item style="background-color: #cbd5e1;" >ALl Todos</a>
-      }@else {
-        <a mat-list-item (click)="loadAllTodos()">ALl Todos</a>
-      }
+      <a mat-list-item routerLink="/home/alltodos" id="alltodos">All Todos</a>
+
       <!-- favourite tasks -->
-      @if (favtodos){
-        <a mat-list-item style="background-color: #cbd5e1;" >Favourite Todos</a>
-      }@else {
-        <a mat-list-item (click)="loadFavTodos()">Favourite Todos</a>
-      }
+      <a mat-list-item routerLink="/home/favtodos">Favourite Todos</a>
+
       <!-- completed tasks -->
-      @if (completedtodos){
-        <a mat-list-item style="background-color: #cbd5e1;" >Completed Todos</a>
-      }@else {
-        <a mat-list-item (click)="loadCompletedTodos()">Completed Todos</a>
-      }
-      
+      <a mat-list-item routerLink="/home/completedtodos">Completed Todos</a>
 
     </mat-nav-list>
   </mat-sidenav>
@@ -50,13 +39,9 @@
       <span>Manage Your Todos</span>
     
     </mat-toolbar>
-    <!-- write content here -->
-    @if (alltodos){
-      <app-all-todos class="bg-zinc-100"></app-all-todos>
-    }@else if (favtodos){
-      <app-fav-todos></app-fav-todos>
-    }@else if (completedtodos){
-      <app-completed-todos></app-completed-todos>
-    }
+
+  <router-outlet></router-outlet>
+
   </mat-sidenav-content>
 </mat-sidenav-container>
+

@@ -15,6 +15,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select'
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { RouterLink, RouterOutlet, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-nav-bar',
@@ -33,14 +34,14 @@ import { Router } from '@angular/router';
     CompletedTodosComponent,
     MatInputModule,
     MatSelectModule,
-    FormsModule
+    FormsModule,
+    RouterLink,
+    RouterOutlet,
+    RouterLinkActive
   ]
 })
 export class NavBarComponent implements OnInit {
   selectedTheme: string = '';
-  alltodos: boolean = false;
-  favtodos: boolean = false;
-  completedtodos: boolean = false;
   router: Router= inject(Router);
 
   private breakpointObserver = inject(BreakpointObserver);
@@ -55,37 +56,15 @@ export class NavBarComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    let url = this.router.url;
-    console.log(url);
-    if (/\/(alltodos|home|todos|)/.test(url)){
-      this.loadAllTodos();
-    }else if (/\/(favtodos|favouritetodos|favrouites)/.test(url)){
-      this.loadFavTodos();
-    }else if (/\/(completedtodos|completed|done)/.test(url)){
-      this.loadCompletedTodos();
-    }
-  }
-  loadAllTodos(): void {
-    this.alltodos = true;
-    this.favtodos = false;
-    this.completedtodos = false;
+    // this.router.navigate(['/home/alltodos']);
+
+    document.getElementById('alltodos')?.click();
   }
 
-  loadFavTodos(): void {
-    this.favtodos = true;
-    this.alltodos = false;
-    this.completedtodos = false;
-  }
 
-  loadCompletedTodos(): void {
-    this.completedtodos = true;
-    this.alltodos = false;
-    this.favtodos = false;
-  }
 
 
   changeTheme() {
     console.log ('selected:', this.selectedTheme)
   }
-  
 }

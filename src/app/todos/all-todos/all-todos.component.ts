@@ -9,6 +9,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+// import { Router } from '@angular/router';
+import { ShareUserDataService } from '../../services/share-user-data.service';
+import { LoadingBarService } from '@ngx-loading-bar/core';
 
 @Component({
   selector: 'app-all-todos',
@@ -19,6 +22,7 @@ import { MatInputModule } from '@angular/material/input';
 
 })
 export class AllTodosComponent implements OnInit {
+  // private router: Router = inject(Router);
   blur : boolean = false;
   timer: any;
   url: string = 'http://localhost:3000/tasks/'
@@ -29,14 +33,33 @@ export class AllTodosComponent implements OnInit {
   tempTodos?: TodoData;
   // injecting the http service we made
   httpService: HttpService = inject(HttpService);
+  public shareUserDataService: ShareUserDataService = inject(ShareUserDataService);
+
+  private loadingBar: LoadingBarService = inject(LoadingBarService);
+
 
   ngOnInit(): void {
     // will use the http service to get the data for todos array
-    this.httpService.getData().subscribe( (data: TodoData) => {
-      this.todos = data;
-    } )
 
-  }
+    // validating the user has logged in or not
+    this.shareUserDataService.getState().subscribe( (data) => {
+      if (data.username === undefined || data.username === null){
+        console.warn('No name: ', data);
+        // this.router.navigate(['/login']);
+        
+      }else{
+      
+      console.warn('inside the share_user_service');
+
+      
+        this.httpService.getData().subscribe( (data: TodoData) => {
+          if (data){
+            this.todos = data.filter( (todo) => todo.userId === this.shareUserDataService.id );
+          }
+        }) // getData subscribe ends here
+      } // else ends here
+    }); // shareUserDataService subscribe ends here
+  } // ngOninit ends here
 
 
   // Drop Method for Drag and Drop written by CDK, it is also chnging the data in db.json
@@ -63,11 +86,11 @@ export class AllTodosComponent implements OnInit {
     }
     for (let  i: number = start; i <= end; i++){
       this.httpService.getData().subscribe( (data) => {
-        this.tempTodos = data; // a temporary data to match the ids and update the data in db.json
+        this.tempTodos = data.filter((data) => data.userId === this.shareUserDataService.id); // a temporary data to match the ids and update the data in db.json
         
           let tempTodosId: string | undefined = this.tempTodos[i].id;
           this.httpService.putData(this.todos![i], tempTodosId).subscribe( () => {
-            this.httpService.getData().subscribe( data => {this.todos = data});
+            this.httpService.getData().subscribe( data => {this.todos = data.filter((data) => data.userId === this.shareUserDataService.id)});
           })
           
       }) // getData subscribe ends here
@@ -78,13 +101,15 @@ export class AllTodosComponent implements OnInit {
 
 
   deleteData( id: string | undefined): void {
+    
     console.log (id);
     this.httpService.deleteData(Number(id)).subscribe( (data: TodoData) => {
-
+      this.startLoadingBar();
       // get the upated data from db.json
       this.httpService.getData().subscribe( (data: TodoData) => {
-        this.todos = data
-        console.log (this.todos);
+        
+        this.todos = data.filter( (todo) => todo.userId === this.shareUserDataService.id );
+        this.stopLoadingBar();
     }) // getData subscribe ends here
   })  // deleteData subscribe ends here
 
@@ -102,7 +127,6 @@ export class AllTodosComponent implements OnInit {
   }
 
   updateData ( todo: Root2, id: string | undefined ){
-    console.log (id);
     this.httpService.putData(todo, id).subscribe( (data: TodoData) => {
       console.log (data);
     })
@@ -118,6 +142,7 @@ export class AllTodosComponent implements OnInit {
     if ( this.task === '' ) return;
     this.todo = {
       id: this.generateUniqueNumber().toString(),
+      userId: this.shareUserDataService.id,
       task: this.task,
       favourite: false,
       completed: false
@@ -127,7 +152,7 @@ export class AllTodosComponent implements OnInit {
     this.todos?.push(this.todo);
 
     this.httpService.postData(this.todo).subscribe( () => {
-      this.httpService.getData().subscribe( (data: TodoData) => this.todos = data );
+      this.httpService.getData().subscribe( (data: TodoData) => this.todos = data.filter( (todo) => todo.userId === this.shareUserDataService.id ) );
     });
 
   }
@@ -150,9 +175,21 @@ export class AllTodosComponent implements OnInit {
   Search(): void {
     this.blur = false;
     this.httpService.getData().subscribe( (data: TodoData) => {
-      this.todos = data;
+      this.todos = data.filter( (todo) => todo.userId === this.shareUserDataService.id );
       this.todos = this.todos?.filter( (todo) => todo.task!.toLowerCase().includes(this.searchTask.toLowerCase()) );
     });
   }
   
+
+
+
+  startLoadingBar(): void {
+    this.blur = true;
+    this.loadingBar.start();
+  }
+
+  stopLoadingBar(): void {
+    this.blur = false;
+    this.loadingBar.complete();
+  }
 }// ! COMPONENT ENDS HERE
